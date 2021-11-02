@@ -1,4 +1,4 @@
-name: container-image
+name: Continous Deployment
 # Ref: https://docs.github.com/en/packages/managing-github-packages-using-github-actions-workflows/publishing-and-installing-a-package-with-github-actions
 # Ref: https://docs.github.com/en/actions/learn-github-actions/contexts#github-context
 
@@ -13,7 +13,7 @@ env:
   IMAGE_NAME: "eatthis/frontend"
 
 jobs:
-  container-image:
+  build:
     permissions:
       contents: read
     runs-on: ubuntu-latest
@@ -41,3 +41,13 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger ArgoCD Sync
+        uses: omegion/argocd-app-actions@master
+        with:
+          address: "cd.eatthis.ch"
+          token: ${{ secrets.ARGOCD_TOKEN }}
+          appName: "eatthis.ch-test" 
+

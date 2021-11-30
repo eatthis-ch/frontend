@@ -16,7 +16,7 @@ jobs:
   build:
     permissions:
       contents: read
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout repoistory
         uses: actions/checkout@v2
@@ -42,7 +42,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Trigger ArgoCD Sync
         uses: omegion/argocd-app-actions@master

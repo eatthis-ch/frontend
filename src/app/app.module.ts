@@ -7,6 +7,11 @@ import { HeaderComponent } from './header/header.component';
 import { MenuGeneratorComponent } from './menu-generator/menu-generator.component';
 import { OverviewComponent } from './overview/overview.component';
 import { MenuDetailComponent } from './menu-detail/menu-detail.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatIconModule} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +23,11 @@ import { MenuDetailComponent } from './menu-detail/menu-detail.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

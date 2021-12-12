@@ -2,30 +2,20 @@ FROM docker.io/node:16-slim AS builder
 
 # Prepare env
 WORKDIR /app
-RUN mkdir /app/bin
 
 # Get Source Code into image
 COPY . .
 
 ## Build process
-RUN npm i --production && \
-    npm i -g @vercel/ncc && \
-    ncc build index.js -o bin
+RUN npm install && \
+    npm install -g @angular/cli@latest && \
+    npm run build --prod
 
 ############# Final image #############
-FROM docker.io/node:16-alpine
+FROM docker.io/nginx:alpine
 LABEL MAINTAINER technat@technat.ch
-
 ## non-root stuff
-USER node
-WORKDIR /home/node/
+USER nginx
+## Get app in
+COPY --from=builder /app/dist/eatthis /usr/share/nginx/html
 
-### ENV Vars
-ENV NODE_ENV developemnt
-
-## App binary
-COPY --from=builder /app/bin/index.js .
-
-EXPOSE 8080
-
-ENTRYPOINT [ "node", "/home/node/index.js"]

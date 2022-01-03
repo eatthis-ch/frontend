@@ -1,0 +1,28 @@
+.health-values {
+  display: flex;
+
+  .protein,
+  .fat,
+  .carbohydrate {
+    margin-right: 10px;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: beige;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .content {
+    margin-left: 16px;
+  }
+}

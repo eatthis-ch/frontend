@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
+import { MenuItemComponent } from './shared/components/menu-item/menu-item.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {MatButtonModule} from '@angular/material/button';
     HeaderComponent,
     MenuDetailComponent,
     MenuGeneratorComponent,
-    MenuOverviewComponent
+    MenuOverviewComponent,
+    MenuItemComponent
   ],
   imports: [
     BrowserModule,

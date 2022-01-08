@@ -1,5 +1,5 @@
 export interface Menu {
-  id: number
+  id: String
   title: String
   energy_cal: number
   protein_g: number
@@ -7,4 +7,7 @@ export interface Menu {
   carbohydrate_g: number
   ingredients: String
   procedure: String
+  description: String
+  image_id: String
+  source: String
 }

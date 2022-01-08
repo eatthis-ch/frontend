@@ -19,7 +19,7 @@ export class MenuOverviewComponent implements OnInit {
     })
   }
 
-  openMenu(id: number): void {
+  openMenu(id: String): void {
     this.router.navigate(['/details', id])
   }
 }

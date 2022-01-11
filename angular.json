@@ -64,6 +64,17 @@
 							"extractLicenses": false,
 							"sourceMap": true,
 							"namedChunks": true
+							"outputHashing": "all",
+							"extractCss": true,
+							"aot": true,
+							"extractLicenses": true,
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "7mb",
+									"maximumError": "20mb"
+								}
+							]
 						}
 					},
 					"defaultConfiguration": "production"
@@ -107,5 +118,9 @@
 			}
 		}
 	},
+<<<<<<< HEAD
 	"defaultProject": "frontend"
+=======
+	"defaultProject": "eatthis"
+>>>>>>> 6e9da21 (increase budgets in angular.json)
 }

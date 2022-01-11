@@ -1,1 +1,7 @@
-<p>menu-overview works!</p>
+<div class="wrapper">
+  <div class="menu-list">
+    <ng-container *ngFor="let menu of menus">
+      <app-menu-item [menu]="menu" (click)="openMenu(menu.id)"></app-menu-item>
+    </ng-container>
+  </div>
+</div>

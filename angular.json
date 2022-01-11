@@ -63,7 +63,7 @@
 							"vendorChunk": true,
 							"extractLicenses": false,
 							"sourceMap": true,
-							"namedChunks": true
+							"namedChunks": true,
 							"outputHashing": "all",
 							"extractCss": true,
 							"aot": true,
@@ -118,9 +118,5 @@
 			}
 		}
 	},
-<<<<<<< HEAD
 	"defaultProject": "frontend"
-=======
-	"defaultProject": "eatthis"
->>>>>>> 6e9da21 (increase budgets in angular.json)
 }

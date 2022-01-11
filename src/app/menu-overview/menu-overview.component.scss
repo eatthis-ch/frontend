@@ -1,34 +1,48 @@
 .wrapper {
+  height: 91%;
+  overflow-y: scroll;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  .menu-wrapper {
+    display: flex;
+    justify-content: center;
 
-  .menu-list {
-    @media only screen and (min-width: 1341px) {
-      grid-template: "a a a";
-      app-menu-item:nth-child(3n) {
-        margin-right: 0;
+    .menu-list {
+      @media only screen and (min-width: 1341px) {
+        grid-template: "a a a";
+        app-menu-item:nth-child(3n) {
+          margin-right: 0;
+        }
       }
-    }
-    @media only screen and (max-width: 1340px) and (min-width: 891px) {
-      grid-template: "a a";
-      app-menu-item:nth-child(2n) {
-        margin-right: 0;
+      @media only screen and (max-width: 1340px) and (min-width: 891px) {
+        grid-template: "a a";
+        app-menu-item:nth-child(2n) {
+          margin-right: 0;
+        }
       }
-    }
-    @media only screen and (max-width: 890px) {
-      grid-template: "a";
+      @media only screen and (max-width: 890px) {
+        grid-template: "a";
+        app-menu-item {
+          margin-right: 0 !important;
+        }
+      }
+      display: grid;
+      margin-top: 48px;
       app-menu-item {
-        margin-right: 0 !important;
+        margin: 0 32px 32px 0;
+        height: 100%;
+        width: 100%;
+        max-width: 420px;
       }
     }
-    display: grid;
-    margin-top: 48px;
-    app-menu-item {
-      margin: 0 32px 32px 0;
-      height: 100%;
-      width: 100%;
-      max-width: 420px;
+  }
+  .loader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+    h3 {
+      margin: 3px 0 0 16px;
     }
-
   }
 }

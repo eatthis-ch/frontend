@@ -15,6 +15,7 @@ jobs:
   build:
     permissions:
       contents: read
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repoistory
         uses: actions/checkout@v2

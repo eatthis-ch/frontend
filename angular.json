@@ -65,7 +65,6 @@
 							"sourceMap": true,
 							"namedChunks": true,
 							"outputHashing": "all",
-							"extractCss": true,
 							"aot": true,
 							"extractLicenses": true,
 							"budgets": [

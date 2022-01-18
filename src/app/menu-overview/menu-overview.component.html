@@ -1,7 +1,16 @@
-<div class="wrapper">
-  <div class="menu-list">
-    <ng-container *ngFor="let menu of menus">
-      <app-menu-item [menu]="menu" (click)="openMenu(menu.id)"></app-menu-item>
-    </ng-container>
+<div class="wrapper" (scroll)="onScroll($event)">
+  <div class="menu-wrapper">
+    <div class="menu-list">
+      <ng-container *ngFor="let menu of menus">
+        <app-menu-item
+          [menu]="menu"
+          (click)="openMenu(menu.id)"
+        ></app-menu-item>
+      </ng-container>
+    </div>
+  </div>
+  <div class="loader">
+    <mat-spinner [diameter]="50"></mat-spinner>
+    <h3>Nächste Rezepte laden...</h3>
   </div>
 </div>

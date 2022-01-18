@@ -16,6 +16,6 @@ export class MenuService {
   constructor(private httpClient: HttpClient) { }
 
   getMenus(page: number): Observable<Menu[]> {
-    return this.httpClient.get<Menu[]>(recipeURL+'?page=' + page);
+    return this.httpClient.get<Menu[]>(recipeURL+`?page=${page}`);
   }
 }

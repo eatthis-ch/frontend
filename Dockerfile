@@ -8,7 +8,7 @@ COPY . .
 
 ## Build process
 RUN npm install && \
-    npm install -g @angular-cli && \
+    npm install -g @angular/cli && \
     ng build
 
 ############# Final image #############

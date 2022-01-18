@@ -18,4 +18,8 @@ export class MenuService {
   getMenus(page: number): Observable<Menu[]> {
     return this.httpClient.get<Menu[]>(recipeURL+`?page=${page}`);
   }
+
+  getMenuById(id: string): Observable<Menu> {
+    return this.httpClient.get<Menu>(recipeURL+`/${id}`);
+  }
 }

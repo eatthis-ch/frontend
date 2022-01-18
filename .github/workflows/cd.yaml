@@ -8,7 +8,7 @@ on:
       - '*'
 
 env:
-  REGISTRY: docker login registry.digitalocean.com
+  REGISTRY: registry.digitalocean.com
   IMAGE_NAME: "eatthis/frontend"
 
 jobs:

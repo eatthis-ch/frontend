@@ -7,6 +7,7 @@ import { MenuOverviewComponent } from "./menu-overview/menu-overview.component";
 const routes: Routes = [
   { path: '', component: MenuGeneratorComponent },
   { path: 'overview', component: MenuOverviewComponent },
+  { path: 'details/:id', component: MenuDetailComponent },
   { path: 'details', component: MenuDetailComponent }
 ];
 

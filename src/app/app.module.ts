@@ -11,6 +11,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
+import { MenuItemComponent } from './shared/components/menu-item/menu-item.component';
+import { HttpClientModule } from '@angular/common/http';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +22,8 @@ import {MatButtonModule} from '@angular/material/button';
     HeaderComponent,
     MenuDetailComponent,
     MenuGeneratorComponent,
-    MenuOverviewComponent
+    MenuOverviewComponent,
+    MenuItemComponent
   ],
   imports: [
     BrowserModule,
@@ -26,9 +31,11 @@ import {MatButtonModule} from '@angular/material/button';
     BrowserAnimationsModule,
     MatIconModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule,
+    MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

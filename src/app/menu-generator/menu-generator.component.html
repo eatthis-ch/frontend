@@ -1,1 +1,54 @@
-<p>menu-generator works!</p>
+<div class="generator">
+  <h2>Menu Generator</h2>
+  <div class="settings">
+    <form [formGroup]="group" (ngSubmit)="submit()">
+      <div class="kcal-slider">
+        <p>Kalorien</p>
+        <mat-slider
+          thumbLabel
+          [min]="kcalMin"
+          [max]="kcalMax"
+          step="100"
+          formControlName="kcal"
+        ></mat-slider>
+      </div>
+
+      <div class="number-input">
+        <p>Anzahl Rezepte</p>
+        <div class="input">
+          <button (click)="changeValue(false)">-</button>
+          <input
+            min="1"
+            max="10"
+            type="number"
+            placeholder="5"
+            class="recipeNumber"
+            formControlName="numOfRecipes"
+            [ngClass]="{ error: !group.get('numOfRecipes')?.valid }"
+          />
+          <button (click)="changeValue(true)">+</button>
+        </div>
+      </div>
+      <button mat-raised-button type="submit">Menu generieren</button>
+    </form>
+  </div>
+
+  <div class="result">
+    <div
+      *ngFor="let menuItem of menus; let i"
+      class="menu-item"
+      [ngStyle]="{
+        width: 90 / group.get('numOfRecipes')?.value + '%',
+        'margin-left': 10 / (group.get('numOfRecipes')?.value * 2) + '%',
+        'margin-right': 10 / (group.get('numOfRecipes')?.value * 2) + '%'
+      }"
+    >
+      <img [src]="getImageURL(menuItem.image_id)" alt="Vorschau Bild" />
+      <p>{{ menuItem.title }}</p>
+      <p>{{ menuItem.description }}</p>
+
+      <p *ngIf="this.lockedMenuIds.includes(menuItem.id)">Locked</p>
+      <button (click)="lockMenu(menuItem.id)">lock</button>
+    </div>
+  </div>
+</div>

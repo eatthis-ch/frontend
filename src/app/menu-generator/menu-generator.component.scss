@@ -1,0 +1,72 @@
+.settings {
+  form {
+    display: flex;
+  }
+}
+
+.kcal-slider {
+  text-align: center;
+  width: 20%;
+  mat-slider {
+    width: 100%;
+  }
+}
+
+.number-input {
+  margin-right: 100px;
+  text-align: center;
+
+  .input {
+    button {
+      border: none;
+      background-color: white;
+      font-size: 20px;
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      margin: 0 2px 0 2px;
+
+      &:hover {
+        background-color: whitesmoke;
+        border: lightgray 0.5px solid;
+        border-radius: 4px;
+      }
+    }
+
+    input[type="number"] {
+      height: 30px;
+      width: 60px;
+      border: solid lightgray 0.5px;
+      -webkit-appearance: textfield;
+      -moz-appearance: textfield;
+      appearance: textfield;
+      font-size: 20px;
+      text-align: center;
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+      }
+    }
+  }
+}
+
+.number-input,
+.number-input * {
+  box-sizing: border-box;
+}
+
+.error {
+  border: red 1px solid !important;
+}
+
+.result {
+  display: inline-flex;
+  width: 100%;
+  justify-content: center;
+  .menu-item {
+    max-width: 30%;
+    img {
+      width: 100%;
+    }
+  }
+}

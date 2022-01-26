@@ -8,17 +8,18 @@ import { MenuDetailComponent } from './menu-detail/menu-detail.component';
 import { MenuGeneratorComponent } from './menu-generator/menu-generator.component';
 import { MenuOverviewComponent } from './menu-overview/menu-overview.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatIconModule} from '@angular/material/icon';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
 import { MenuItemComponent } from './shared/components/menu-item/menu-item.component';
 import { HttpClientModule } from '@angular/common/http';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatSliderModule} from '@angular/material/slider';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MenuDetailComponent,
     MenuGeneratorComponent,
     MenuOverviewComponent,
-    MenuItemComponent
+    MenuItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,9 +42,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSliderModule,
     MatInputModule,
     MatFormFieldModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule,
+    MatTooltipModule,
   ],
   providers: [HttpClientModule],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

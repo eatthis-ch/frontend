@@ -14,6 +14,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { MenuItemComponent } from './shared/components/menu-item/menu-item.component';
 import { HttpClientModule } from '@angular/common/http';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { HealthGridComponent } from './shared/components/health-grid/health-grid.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MenuDetailComponent,
     MenuGeneratorComponent,
     MenuOverviewComponent,
-    MenuItemComponent
+    MenuItemComponent,
+    HealthGridComponent
   ],
   imports: [
     BrowserModule,

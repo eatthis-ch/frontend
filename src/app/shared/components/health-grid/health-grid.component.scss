@@ -1,0 +1,34 @@
+.wrapper {
+  //   display: grid;
+  //   grid-template-columns: repeat(4, 1fr);
+  width: 40%;
+  display: inline-flex;
+
+  .item {
+    display: flex;
+    justify-content: center;
+    margin: 0 2px;
+
+    &:first-of-type {
+      margin-left: 0px;
+    }
+    table {
+      border-spacing: 0px;
+      th {
+        width: 37px;
+        border: 1px solid lightgray;
+        background-color: lightgrey;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+      }
+      td {
+        width: 37px;
+        text-align: center;
+        background-color: whitesmoke;
+        border: 1px solid lightgray;
+        border-bottom-left-radius: 2px;
+        border-bottom-right-radius: 2px;
+      }
+    }
+  }
+}

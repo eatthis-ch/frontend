@@ -19,6 +19,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HealthGridComponent } from './shared/components/health-grid/health-grid.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { HealthGridComponent } from './shared/components/health-grid/health-grid
     MatInputModule,
     MatFormFieldModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
+    MatTooltipModule,
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],

@@ -3,17 +3,12 @@
   <div class="content">
     <h2 class="title">{{ menu.title }}</h2>
     <p class="description">{{ menu.description }}</p>
-    <p class="calories">{{ menu.energy_cal }} kcal</p>
-    <div class="health-values">
-      <div class="protein">
-        <p>{{ menu.protein_g }}</p>
-      </div>
-      <div class="fat">
-        <p>{{ menu.fat_g }}</p>
-      </div>
-      <div class="carbohydrate">
-        <p>{{ menu.carbohydrate_g }}</p>
-      </div>
-    </div>
+    <app-health-grid
+      [cal]="menu.energy_cal"
+      [protein]="menu.protein_g"
+      [fat]="menu.fat_g"
+      [carbs]="menu.carbohydrate_g"
+    >
+    </app-health-grid>
   </div>
 </div>

@@ -1,13 +1,3 @@
-.health-values {
-  display: flex;
-
-  .protein,
-  .fat,
-  .carbohydrate {
-    margin-right: 10px;
-  }
-}
-
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -24,5 +14,6 @@
 
   .content {
     margin-left: 16px;
+    margin-bottom: 16px;
   }
 }

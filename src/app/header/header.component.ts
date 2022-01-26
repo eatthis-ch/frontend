@@ -15,13 +15,15 @@ export class HeaderComponent {
 
   clickOverview() {
     this.router.navigate(['overview']);
+    const temp = setTimeout(() => {
+      const highestTimeoutId = setTimeout(';');
+      for (let i = 0; i < highestTimeoutId; i++) {
+        clearTimeout(i);
+      }
+    }, 200);
   }
 
   clickGenerator() {
     this.router.navigate(['']);
   }
-
-  clickSettings() {}
-
-  clickAdd() {}
 }

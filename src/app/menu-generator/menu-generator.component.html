@@ -43,12 +43,47 @@
         'margin-right': 10 / (group.get('numOfRecipes')?.value * 2) + '%'
       }"
     >
-      <img [src]="getImageURL(menuItem.image_id)" alt="Vorschau Bild" />
-      <p>{{ menuItem.title }}</p>
-      <p>{{ menuItem.description }}</p>
-
-      <p *ngIf="this.lockedMenuIds.includes(menuItem.id)">Locked</p>
-      <button (click)="lockMenu(menuItem.id)">lock</button>
+      <div class="image">
+        <img
+          class="previewImg"
+          [src]="getImageURL(menuItem.image_id)"
+          alt="Vorschau Bild"
+        />
+        <button
+          mat-icon-button
+          (click)="lockMenu(menuItem.id)"
+          [ngStyle]="{
+            bottom: imgHeight / 2 + 30 + 'px',
+            left: imgWidth / 2 - 15 + 'px',
+            display: this.lockedMenuIds.includes(menuItem.id)
+              ? 'inline'
+              : 'none'
+          }"
+          *ngIf="this.lockedMenuIds.includes(menuItem.id)"
+        >
+          <fa-icon [icon]="faLock"></fa-icon>
+        </button>
+        <button
+          mat-icon-button
+          (click)="lockMenu(menuItem.id)"
+          [ngStyle]="{
+            bottom: imgHeight / 2 + 30 + 'px',
+            left: imgWidth / 2 - 15 + 'px'
+          }"
+          *ngIf="!this.lockedMenuIds.includes(menuItem.id)"
+        >
+          <fa-icon [icon]="faLockOpen"></fa-icon>
+        </button>
+      </div>
+      <div
+        class="content"
+        [ngStyle]="{
+          top: this.lockedMenuIds.includes(menuItem.id) ? '-40px' : '0'
+        }"
+      >
+        <p>{{ menuItem.title }}</p>
+        <p>{{ menuItem.description }}</p>
+      </div>
     </div>
   </div>
 </div>

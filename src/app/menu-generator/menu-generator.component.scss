@@ -65,8 +65,34 @@
   justify-content: center;
   .menu-item {
     max-width: 30%;
+    &:hover {
+      .image {
+        button {
+          display: inline;
+          cursor: pointer;
+        }
+      }
+      .content {
+        position: relative;
+        top: -40px !important;
+        cursor: pointer;
+      }
+    }
+    .image {
+      button {
+        position: relative;
+        display: none;
+      }
+      fa-icon {
+        font-size: 30px;
+      }
+    }
     img {
       width: 100%;
+    }
+
+    .content {
+      position: relative;
     }
   }
 }

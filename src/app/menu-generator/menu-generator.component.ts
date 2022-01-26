@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Menu } from '../shared/models/menu';
 import { MenuService } from '../shared/services/menu.service';
+import { faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-generator',
@@ -9,8 +11,12 @@ import { MenuService } from '../shared/services/menu.service';
   styleUrls: ['./menu-generator.component.scss'],
 })
 export class MenuGeneratorComponent implements OnInit {
+  faLock = faLock;
+  faLockOpen = faLockOpen;
   kcalMin = 200;
   kcalMax = 6500;
+  imgHeight = 0;
+  imgWidth = 0;
   group = new FormGroup({
     kcal: new FormControl(Math.round(this.kcalMax / 3), [Validators.required]),
     numOfRecipes: new FormControl(5, [Validators.required]),
@@ -19,7 +25,7 @@ export class MenuGeneratorComponent implements OnInit {
   menus: Menu[] = [];
   lockedMenuIds: string[] = [];
 
-  constructor(private menuService: MenuService) {}
+  constructor(private menuService: MenuService, private router: Router) {}
 
   ngOnInit() {
     this.group.get('numOfRecipes')?.valueChanges.subscribe((change) => {
@@ -34,6 +40,16 @@ export class MenuGeneratorComponent implements OnInit {
         }
       }
     });
+
+    setInterval(() => {
+      if (this.menus.length > 0) {
+        const img = document.getElementsByClassName(
+          'previewImg'
+        )[0] as HTMLElement;
+        this.imgHeight = img.offsetHeight;
+        this.imgWidth = img.offsetWidth;
+      }
+    }, 500);
   }
 
   submit() {
@@ -91,5 +107,9 @@ export class MenuGeneratorComponent implements OnInit {
 
   getImageURL(imgURL: string): string {
     return this.menuService.getImageURL(imgURL);
+  }
+
+  openMenu(id: string) {
+    this.router.navigate(['/details', id]);
   }
 }

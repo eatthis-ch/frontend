@@ -70,10 +70,17 @@ export class MenuGeneratorComponent implements OnInit {
             this.lockedMenuIds
           )
           .subscribe((res) => {
-            this.menus = lockedMenus;
-            res.forEach((menu) => {
-              this.menus.push(menu);
-            });
+            const notLockedMenuIndex = [];
+            for (let i = 0; i < this.menus.length; i++) {
+              const menu = this.menus[i];
+              if (!this.lockedMenuIds.includes(menu.id)) {
+                notLockedMenuIndex.push(i);
+              }
+            }
+            for (let i = 0; i < res.length; i++) {
+              const element = res[i];
+              this.menus[notLockedMenuIndex[i]] = element;
+            }
           });
       } else {
         this.menuService

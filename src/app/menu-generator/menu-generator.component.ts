@@ -21,13 +21,14 @@ export class MenuGeneratorComponent implements OnInit {
     kcal: new FormControl(Math.round(this.kcalMax / 3), [Validators.required]),
     numOfRecipes: new FormControl(5, [Validators.required]),
   });
-
+  screenWidth = 100;
   menus: Menu[] = [];
   lockedMenuIds: string[] = [];
 
   constructor(private menuService: MenuService, private router: Router) {}
 
   ngOnInit() {
+    this.screenWidth = window.innerWidth
     this.group.get('numOfRecipes')?.valueChanges.subscribe((change) => {
       if (change !== null) {
         this.kcalMax = 1300 * change;

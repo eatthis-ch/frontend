@@ -3,9 +3,8 @@
   <div class="settings">
     <form [formGroup]="group" (ngSubmit)="submit()">
       <div class="kcal-slider">
-        <p>Kalorien</p>
+        <p>Kalorien: {{ group.get("kcal")?.value }}</p>
         <mat-slider
-          thumbLabel
           [min]="kcalMin"
           [max]="kcalMax"
           step="100"
@@ -35,10 +34,10 @@
 
   <div class="result">
     <div
-      *ngFor="let menuItem of menus; let i"
+      *ngFor="let menuItem of menus; let i = index"
       class="menu-item"
       [ngStyle]="{
-        width: 90 / group.get('numOfRecipes')?.value + '%',
+        width: screenWidth / group.get('numOfRecipes')?.value + 'px',
         'margin-left': 10 / (group.get('numOfRecipes')?.value * 2) + '%',
         'margin-right': 10 / (group.get('numOfRecipes')?.value * 2) + '%'
       }"
@@ -48,6 +47,7 @@
           class="previewImg"
           [src]="getImageURL(menuItem.image_id)"
           alt="Vorschau Bild"
+          (click)="openMenu(menuItem.id)"
         />
         <button
           mat-icon-button
@@ -80,6 +80,7 @@
         [ngStyle]="{
           top: this.lockedMenuIds.includes(menuItem.id) ? '-40px' : '0'
         }"
+        (click)="openMenu(menuItem.id)"
       >
         <p>{{ menuItem.title }}</p>
         <p>{{ menuItem.description }}</p>

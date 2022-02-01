@@ -3,6 +3,7 @@
   flex-direction: column;
   width: 100%;
   background-color: beige;
+  height: 100%;
 
   &:hover {
     cursor: pointer;
@@ -13,6 +14,12 @@
   }
 
   .content {
+    height: 100%;
+    margin-left: 16px;
+    margin-bottom: 16px;
+  }
+
+  .health-wrapper {
     margin-left: 16px;
     margin-bottom: 16px;
   }

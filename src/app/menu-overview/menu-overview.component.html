@@ -1,4 +1,8 @@
-<div class="wrapper" (scroll)="onScroll($event)">
+<div
+  class="wrapper"
+  (scroll)="onScroll($event)"
+  [ngStyle]="{ height: wrapperHeight - 61 + 'px' }"
+>
   <div class="menu-wrapper">
     <div class="menu-list">
       <ng-container *ngFor="let menu of menus">

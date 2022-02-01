@@ -24,11 +24,13 @@ export class MenuGeneratorComponent implements OnInit {
   screenWidth = 100;
   menus: Menu[] = [];
   lockedMenuIds: string[] = [];
+  hover = false;
+  maxHeight = 250;
 
   constructor(private menuService: MenuService, private router: Router) {}
 
   ngOnInit() {
-    this.screenWidth = window.innerWidth
+    this.screenWidth = window.innerWidth;
     this.group.get('numOfRecipes')?.valueChanges.subscribe((change) => {
       if (change !== null) {
         this.kcalMax = 1300 * change;
@@ -82,12 +84,20 @@ export class MenuGeneratorComponent implements OnInit {
               const element = res[i];
               this.menus[notLockedMenuIndex[i]] = element;
             }
+            setTimeout(() => {
+              this.maxHeight = 200;
+              this.maxHeight = this.getHighestHeight();
+            }, 1500);
           });
       } else {
         this.menuService
           .generateMenus(kcal, this.group.get('numOfRecipes')?.value)
           .subscribe((res) => {
             this.menus = res;
+            setTimeout(() => {
+              this.maxHeight = 200;
+              this.maxHeight = this.getHighestHeight();
+            }, 1500);
           });
       }
     }
@@ -119,5 +129,17 @@ export class MenuGeneratorComponent implements OnInit {
 
   openMenu(id: string) {
     this.router.navigate(['/details', id]);
+  }
+
+  getHighestHeight(): number {
+    const menuItems = document.getElementsByClassName('menu-item');
+    let maxHeight = 0;
+    for (let i = 0; i < menuItems.length; i++) {
+      const menu = menuItems.item(i) as HTMLElement;
+      if (menu.offsetHeight > maxHeight) {
+        maxHeight = menu.offsetHeight;
+      }
+    }
+    return maxHeight;
   }
 }

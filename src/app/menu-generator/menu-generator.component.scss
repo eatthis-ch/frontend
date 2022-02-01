@@ -5,6 +5,9 @@
 }
 .settings {
   margin-bottom: 32px;
+  p {
+    font-size: 16px;
+  }
   form {
     display: flex;
     width: 100%;
@@ -27,7 +30,7 @@
   .input {
     button {
       border: none;
-      background-color: white;
+      background-color: whitesmoke;
       font-size: 20px;
       width: 30px;
       height: 30px;
@@ -35,8 +38,8 @@
       margin: 0 2px 0 2px;
 
       &:hover {
-        background-color: whitesmoke;
-        border: lightgray 0.5px solid;
+        background-color: lightgray;
+        border: gray 0.5px solid;
         border-radius: 4px;
       }
     }
@@ -72,11 +75,10 @@
   width: 100%;
   justify-content: center;
   .menu-item {
+    position: relative;
+    background-color: beige;
+
     @media only screen and (max-width: 890px) {
-      &:nth-child(3):after {
-        clear: left;
-        content: "\A";
-      }
     }
 
     @media only screen and (max-width: 1340px) and (min-width: 891px) {

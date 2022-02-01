@@ -39,8 +39,11 @@
       [ngStyle]="{
         width: screenWidth / group.get('numOfRecipes')?.value + 'px',
         'margin-left': 10 / (group.get('numOfRecipes')?.value * 2) + '%',
-        'margin-right': 10 / (group.get('numOfRecipes')?.value * 2) + '%'
+        'margin-right': 10 / (group.get('numOfRecipes')?.value * 2) + '%',
+        height: hover ? maxHeight + 'px' : ''
       }"
+      (mouseover)="hover = true"
+      (mouseleave)="hover = false"
     >
       <div class="image">
         <img

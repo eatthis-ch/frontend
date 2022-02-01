@@ -91,19 +91,18 @@
     &:hover {
       .image {
         button {
+          position: absolute;
           display: inline;
           cursor: pointer;
         }
       }
       .content {
-        position: relative;
-        top: -40px !important;
         cursor: pointer;
       }
     }
     .image {
       button {
-        position: relative;
+        position: absolute;
         display: none;
       }
       fa-icon {
@@ -112,10 +111,6 @@
     }
     img {
       width: 100%;
-    }
-
-    .content {
-      position: relative;
     }
   }
 }

@@ -1,21 +1,23 @@
-<mat-toolbar color="primary">
-  <button mat-icon-button class="example-icon" (click)="clickSettings()">
-    <mat-icon>settings</mat-icon>
-  </button>
-  <button
-    mat-icon-button
-    class="example-icon favorite-icon"
-    (click)="clickOverview()"
-  >
-    <mat-icon>library_books</mat-icon>
-  </button>
-  <button mat-icon-button class="example-icon" (click)="clickGenerator()">
-    <mat-icon>shuffle</mat-icon>
-  </button>
-  <div class="title">
-    <h1>Das ist ein Titel</h1>
+<header>
+  <div class="icons">
+    <div class="overview">
+      <button
+        mat-icon-button
+        matTooltip="Rezeptübersicht öffnen"
+        (click)="clickOverview()"
+      >
+        <fa-icon [icon]="faArchive"></fa-icon>
+      </button>
+    </div>
+    <div class="generator">
+      <button
+        mat-icon-button
+        matTooltip="Menügenerator öffnen"
+        (click)="clickGenerator()"
+      >
+        <fa-icon [icon]="faDice"></fa-icon>
+      </button>
+    </div>
   </div>
-  <button mat-icon-button class="example-icon" (click)="clickAdd()">
-    <mat-icon>add</mat-icon>
-  </button>
-</mat-toolbar>
+  <h1>eatthis.ch</h1>
+</header>

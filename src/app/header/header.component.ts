@@ -1,31 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { faDice, faArchive } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
+  constructor(private router: Router) {}
 
-  constructor(private router: Router) { }
-
-  ngOnInit() {
-  }
+  faDice = faDice;
+  faArchive = faArchive;
 
   clickOverview() {
-    this.router.navigate(['overview'])
+    this.router.navigate(['overview']);
+    const temp = setTimeout(() => {
+      const highestTimeoutId = setTimeout(';');
+      for (let i = 0; i < highestTimeoutId; i++) {
+        clearTimeout(i);
+      }
+    }, 200);
   }
 
   clickGenerator() {
-    this.router.navigate([''])
-  }
-
-  clickSettings() {
-
-  }
-
-  clickAdd() {
-
+    this.router.navigate(['']);
   }
 }

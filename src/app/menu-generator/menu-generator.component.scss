@@ -1,0 +1,121 @@
+.generator {
+  h2 {
+    margin-left: 16px;
+  }
+}
+.settings {
+  margin-bottom: 32px;
+  p {
+    font-size: 16px;
+  }
+  form {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+  }
+}
+
+.kcal-slider {
+  text-align: center;
+  width: 20%;
+  mat-slider {
+    width: 100%;
+  }
+}
+
+.number-input {
+  margin-right: 100px;
+  text-align: center;
+
+  .input {
+    button {
+      border: none;
+      background-color: whitesmoke;
+      font-size: 20px;
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      margin: 0 2px 0 2px;
+
+      &:hover {
+        background-color: lightgray;
+        border: gray 0.5px solid;
+        border-radius: 4px;
+      }
+    }
+
+    input[type="number"] {
+      height: 30px;
+      width: 60px;
+      border: solid lightgray 0.5px;
+      -webkit-appearance: textfield;
+      -moz-appearance: textfield;
+      appearance: textfield;
+      font-size: 20px;
+      text-align: center;
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+      }
+    }
+  }
+}
+
+.number-input,
+.number-input * {
+  box-sizing: border-box;
+}
+
+.error {
+  border: red 1px solid !important;
+}
+
+.result {
+  display: inline-flex;
+  width: 100%;
+  justify-content: center;
+  .menu-item {
+    position: relative;
+    background-color: beige;
+
+    @media only screen and (max-width: 890px) {
+    }
+
+    @media only screen and (max-width: 1340px) and (min-width: 891px) {
+    }
+
+    @media only screen and (min-width: 1341px) {
+    }
+
+    max-width: 30%;
+    &:hover {
+      .image {
+        button {
+          display: inline;
+          cursor: pointer;
+        }
+      }
+      .content {
+        position: relative;
+        top: -40px !important;
+        cursor: pointer;
+      }
+    }
+    .image {
+      button {
+        position: relative;
+        display: none;
+      }
+      fa-icon {
+        font-size: 30px;
+      }
+    }
+    img {
+      width: 100%;
+    }
+
+    .content {
+      position: relative;
+    }
+  }
+}

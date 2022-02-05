@@ -5,7 +5,7 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './health-grid.component.html',
   styleUrls: ['./health-grid.component.scss'],
 })
-export class HealthGridComponent implements OnInit {
+export class HealthGridComponent{
   @Input() cal = 0;
   @Input() protein = 0;
   @Input() fat = 0;
@@ -13,5 +13,4 @@ export class HealthGridComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
 }

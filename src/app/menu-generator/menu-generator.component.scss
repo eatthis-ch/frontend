@@ -12,10 +12,23 @@
     display: flex;
     width: 100%;
     justify-content: space-around;
+    @media only screen and (max-width: 825px) {
+      flex-direction: column;
+      align-items: center;
+      .number-input {
+        margin: 0 0 16px 0;
+      }
+    }
   }
 }
 
 .kcal-slider {
+  @media only screen and (max-width: 825px) {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 70%;
+  }
   text-align: center;
   width: 20%;
   mat-slider {
@@ -71,23 +84,25 @@
 }
 
 .result {
-  display: inline-flex;
-  width: 100%;
+  display: grid;
+  width: 98%;
   justify-content: center;
-  .menu-item {
+  grid-template: "a a a a a";
+  grid-auto-columns: minmax(0, 1fr);
+  column-gap: 16px;
+  row-gap: 16px;
+  position: relative;
+  margin-bottom: 32px;
+  @media only screen and (max-width: 825px) {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .menu-item-desktop {
     position: relative;
     background-color: beige;
 
-    @media only screen and (max-width: 890px) {
-    }
-
-    @media only screen and (max-width: 1340px) and (min-width: 891px) {
-    }
-
-    @media only screen and (min-width: 1341px) {
-    }
-
-    max-width: 30%;
     &:hover {
       .image {
         button {
@@ -116,6 +131,54 @@
 
     .content {
       position: relative;
+      margin-left: 16px;
     }
   }
+
+  .menu-item-mobile {
+    position: relative;
+    width: 95%;
+    background-color: beige;
+    margin-bottom: 16px;
+    .image {
+      button {
+        position: relative;
+      }
+      fa-icon {
+        font-size: 30px;
+      }
+    }
+    img {
+      width: 100%;
+    }
+
+    .content {
+      position: relative;
+      top: -40px !important;
+      margin-left: 16px;
+    }
+  }
+}
+
+@media only screen and (max-width: 825px) {
+  .menu-item-desktop {
+    display: none;
+  }
+  .menu-item-mobile {
+    display: inline;
+  }
+}
+
+@media only screen and (min-width: 826px) {
+  .menu-item-desktop {
+    display: inline;
+  }
+  .menu-item-mobile {
+    display: none;
+  }
+}
+
+.result-wrapper {
+  display: flex;
+  justify-content: center;
 }

@@ -1,5 +1,4 @@
 .wrapper {
-  height: 91%;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
@@ -28,9 +27,11 @@
         }
       }
       display: grid;
-      margin-top: 48px;
+      margin-top: 32px;
+      row-gap: 32px;
       app-menu-item {
-        margin: 0 32px 32px 0;
+        background-color: beige;
+        margin: 0 32px 0 0;
         height: 100%;
         width: 100%;
         max-width: 420px;

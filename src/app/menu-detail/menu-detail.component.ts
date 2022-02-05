@@ -10,6 +10,8 @@ import { MenuService } from '../shared/services/menu.service';
 })
 export class MenuDetailComponent implements OnInit {
   menu: Menu = {} as Menu;
+  imageURL: string = "";
+  ingredientsSplit: string[] = [];
 
   constructor(private menuService: MenuService, private route: ActivatedRoute) { }
 
@@ -17,9 +19,9 @@ export class MenuDetailComponent implements OnInit {
     this.menuService.getMenuById(this.route.snapshot.paramMap.get('id')!).subscribe(res => {
       this.menu = res
       console.log(res);
-      
+      this.imageURL = `https://eatthis.fra1.digitaloceanspaces.com/${this.menu.image_id}.jpg`;
+      this.ingredientsSplit = res.ingredients.split("\n");
     })
-    //console.log(this.menu);
   }
 
 }

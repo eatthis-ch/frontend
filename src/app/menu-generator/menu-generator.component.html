@@ -32,61 +32,105 @@
     </form>
   </div>
 
-  <div class="result">
-    <div
-      *ngFor="let menuItem of menus; let i = index"
-      class="menu-item"
-      [ngStyle]="{
-        width: screenWidth / group.get('numOfRecipes')?.value + 'px',
-        'margin-left': 10 / (group.get('numOfRecipes')?.value * 2) + '%',
-        'margin-right': 10 / (group.get('numOfRecipes')?.value * 2) + '%',
-        height: hover ? maxHeight + 'px' : ''
-      }"
-      (mouseover)="hover = true"
-      (mouseleave)="hover = false"
-    >
-      <div class="image">
-        <img
-          class="previewImg"
-          [src]="getImageURL(menuItem.image_id)"
-          alt="Vorschau Bild"
-          (click)="openMenu(menuItem.id)"
-        />
-        <button
-          mat-icon-button
-          (click)="lockMenu(menuItem.id)"
-          [ngStyle]="{
-            bottom: imgHeight / 2 + 30 + 'px',
-            left: imgWidth / 2 - 15 + 'px',
-            display: this.lockedMenuIds.includes(menuItem.id)
-              ? 'inline'
-              : 'none'
-          }"
-          *ngIf="this.lockedMenuIds.includes(menuItem.id)"
-        >
-          <fa-icon [icon]="faLock"></fa-icon>
-        </button>
-        <button
-          mat-icon-button
-          (click)="lockMenu(menuItem.id)"
-          [ngStyle]="{
-            bottom: imgHeight / 2 + 30 + 'px',
-            left: imgWidth / 2 - 15 + 'px'
-          }"
-          *ngIf="!this.lockedMenuIds.includes(menuItem.id)"
-        >
-          <fa-icon [icon]="faLockOpen"></fa-icon>
-        </button>
-      </div>
+  <div class="result-wrapper">
+    <div class="result">
+      <!-- DESKTOP -->
       <div
-        class="content"
+        *ngFor="let menuItem of menus; let i = index"
+        class="menu-item-desktop"
         [ngStyle]="{
-          top: this.lockedMenuIds.includes(menuItem.id) ? '-40px' : '0'
+          height: hover ? maxHeight + 'px' : ''
         }"
-        (click)="openMenu(menuItem.id)"
+        (mouseover)="hover = true"
+        (mouseleave)="hover = false"
       >
-        <p>{{ menuItem.title }}</p>
-        <p>{{ menuItem.description }}</p>
+        <div class="image">
+          <img
+            class="previewImg"
+            [src]="getImageURL(menuItem.image_id)"
+            alt="Vorschau Bild"
+            (click)="openMenu(menuItem.id)"
+          />
+          <button
+            mat-icon-button
+            (click)="lockMenu(menuItem.id)"
+            [ngStyle]="{
+              bottom: 60 + 'px',
+              left: imgWidth / 2 - 15 + 'px',
+              display: this.lockedMenuIds.includes(menuItem.id)
+                ? 'inline'
+                : 'none'
+            }"
+            *ngIf="this.lockedMenuIds.includes(menuItem.id)"
+          >
+            <fa-icon [icon]="faLock"></fa-icon>
+          </button>
+          <button
+            mat-icon-button
+            (click)="lockMenu(menuItem.id)"
+            [ngStyle]="{
+              bottom: 60 + 'px',
+              left: imgWidth / 2 - 15 + 'px'
+            }"
+            *ngIf="!this.lockedMenuIds.includes(menuItem.id)"
+          >
+            <fa-icon [icon]="faLockOpen"></fa-icon>
+          </button>
+        </div>
+        <div
+          class="content"
+          [ngStyle]="{
+            top: this.lockedMenuIds.includes(menuItem.id) ? '-40px' : '0'
+          }"
+          (click)="openMenu(menuItem.id)"
+        >
+          <p>{{ menuItem.title }}</p>
+          <p>{{ menuItem.description }}</p>
+        </div>
+      </div>
+
+      <!-- MOBILE  -->
+      <div
+        class="menu-item-mobile"
+        *ngFor="let menuItem of menus; let i = index"
+      >
+        <div class="image">
+          <img
+            class="previewImg"
+            [src]="getImageURL(menuItem.image_id)"
+            alt="Vorschau Bild"
+            (click)="openMenu(menuItem.id)"
+          />
+          <button
+            mat-icon-button
+            (click)="lockMenu(menuItem.id)"
+            [ngStyle]="{
+              bottom: 60 + 'px',
+              left: imgWidth / 2 - 15 + 'px',
+              display: this.lockedMenuIds.includes(menuItem.id)
+                ? 'inline'
+                : 'none'
+            }"
+            *ngIf="this.lockedMenuIds.includes(menuItem.id)"
+          >
+            <fa-icon [icon]="faLock"></fa-icon>
+          </button>
+          <button
+            mat-icon-button
+            (click)="lockMenu(menuItem.id)"
+            [ngStyle]="{
+              bottom: 60 + 'px',
+              left: imgWidth / 2 - 15 + 'px'
+            }"
+            *ngIf="!this.lockedMenuIds.includes(menuItem.id)"
+          >
+            <fa-icon [icon]="faLockOpen"></fa-icon>
+          </button>
+        </div>
+        <div class="content" (click)="openMenu(menuItem.id)">
+          <p>{{ menuItem.title }}</p>
+          <p>{{ menuItem.description }}</p>
+        </div>
       </div>
     </div>
   </div>

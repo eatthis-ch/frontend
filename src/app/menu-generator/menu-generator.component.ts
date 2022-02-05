@@ -26,11 +26,13 @@ export class MenuGeneratorComponent implements OnInit {
   lockedMenuIds: string[] = [];
   hover = false;
   maxHeight = 250;
+  isMobile = false
 
   constructor(private menuService: MenuService, private router: Router) {}
 
   ngOnInit() {
     this.screenWidth = window.innerWidth;
+    this.isMobile = this.screenWidth <= 1340 ? true : false;
     this.group.get('numOfRecipes')?.valueChanges.subscribe((change) => {
       if (change !== null) {
         this.kcalMax = 1300 * change;
@@ -46,9 +48,16 @@ export class MenuGeneratorComponent implements OnInit {
 
     setInterval(() => {
       if (this.menus.length > 0) {
-        const img = document.getElementsByClassName(
-          'previewImg'
-        )[0] as HTMLElement;
+        let img;
+        if (this.isMobile) {
+          img = document.getElementsByClassName(
+            'previewImg'
+          )[this.group.get('numOfRecipes')?.value * 2 - 1] as HTMLElement;
+        } else {
+          img = document.getElementsByClassName(
+            'previewImg'
+          )[0] as HTMLElement;
+        }
         this.imgHeight = img.offsetHeight;
         this.imgWidth = img.offsetWidth;
       }
@@ -87,7 +96,7 @@ export class MenuGeneratorComponent implements OnInit {
             setTimeout(() => {
               this.maxHeight = 200;
               this.maxHeight = this.getHighestHeight();
-            }, 1500);
+            }, 1000);
           });
       } else {
         this.menuService
@@ -97,7 +106,7 @@ export class MenuGeneratorComponent implements OnInit {
             setTimeout(() => {
               this.maxHeight = 200;
               this.maxHeight = this.getHighestHeight();
-            }, 1500);
+            }, 1000);
           });
       }
     }
@@ -132,7 +141,7 @@ export class MenuGeneratorComponent implements OnInit {
   }
 
   getHighestHeight(): number {
-    const menuItems = document.getElementsByClassName('menu-item');
+    const menuItems = document.getElementsByClassName('menu-item-desktop');
     let maxHeight = 0;
     for (let i = 0; i < menuItems.length; i++) {
       const menu = menuItems.item(i) as HTMLElement;

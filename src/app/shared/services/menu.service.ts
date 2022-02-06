@@ -33,4 +33,8 @@ export class MenuService {
       recipeURL + `/generate?calories=${kcal}&numberOfRecipes=${numOfRecipes}`
     );
   }
+
+  getMenuById(id: string): Observable<Menu> {
+    return this.httpClient.get<Menu>(recipeURL+`/${id}`);
+  }
 }

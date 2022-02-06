@@ -1,1 +1,37 @@
-<p>menu-detail works!</p>
+<h1>{{ menu.title }}</h1>
+<div class="content">
+  <div class="content-image">
+    <img [src]="imageURL" alt="placeholder" />
+  </div>
+  <div class="content-info">
+    <p class="description">
+      {{ menu.description }}
+    </p>
+    <div class="procedure-desktop">
+      <p>
+        {{ menu.procedure }}
+      </p>
+      <p *ngIf="menu.source">Quelle: {{ menu.source }}</p>
+    </div>
+  </div>
+  <div class="content-ingredients">
+    <div class="ingredients">
+      <p>Zutaten:</p>
+      <ul *ngFor="let ingredient of ingredientsSplit">
+        <li>{{ ingredient }}</li>
+      </ul>
+    </div>
+    <app-health-grid
+      [cal]="menu.energy_cal"
+      [protein]="menu.protein_g"
+      [fat]="menu.fat_g"
+      [carbs]="menu.carbohydrate_g"
+    ></app-health-grid>
+    <div class="procedure-mobile">
+      <p>
+        {{ menu.procedure }}
+      </p>
+      <p *ngIf="menu.source">Quelle: {{ menu.source }}</p>
+    </div>
+  </div>
+</div>

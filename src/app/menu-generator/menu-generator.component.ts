@@ -137,7 +137,7 @@ export class MenuGeneratorComponent implements OnInit {
   }
 
   openMenu(id: string) {
-    this.router.navigate(['/details', id]);
+    window.open('/details/'+ id);
   }
 
   getHighestHeight(): number {

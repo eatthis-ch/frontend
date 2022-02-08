@@ -23,7 +23,8 @@ export class MenuOverviewComponent implements OnInit {
   }
 
   openMenu(id: String): void {
-    this.router.navigate(['/details', id]);
+    const baseUrl = window.location.href.replace(this.router.url, '');
+    window.open(baseUrl + '/details/'+ id);
   }
 
   getNextMenus(page: number) {

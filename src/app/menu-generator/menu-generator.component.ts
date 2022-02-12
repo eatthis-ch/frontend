@@ -4,6 +4,7 @@ import { Menu } from '../shared/models/menu';
 import { MenuService } from '../shared/services/menu.service';
 import { faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-menu-generator',
@@ -26,7 +27,7 @@ export class MenuGeneratorComponent implements OnInit {
   lockedMenuIds: string[] = [];
   hover = false;
   maxHeight = 250;
-  isMobile = false
+  isMobile = false;
 
   constructor(private menuService: MenuService, private router: Router) {}
 
@@ -50,13 +51,11 @@ export class MenuGeneratorComponent implements OnInit {
       if (this.menus.length > 0) {
         let img;
         if (this.isMobile) {
-          img = document.getElementsByClassName(
-            'previewImg'
-          )[this.group.get('numOfRecipes')?.value * 2 - 1] as HTMLElement;
+          img = document.getElementsByClassName('previewImg')[
+            this.group.get('numOfRecipes')?.value * 2 - 1
+          ] as HTMLElement;
         } else {
-          img = document.getElementsByClassName(
-            'previewImg'
-          )[0] as HTMLElement;
+          img = document.getElementsByClassName('previewImg')[0] as HTMLElement;
         }
         this.imgHeight = img.offsetHeight;
         this.imgWidth = img.offsetWidth;
@@ -137,7 +136,7 @@ export class MenuGeneratorComponent implements OnInit {
   }
 
   openMenu(id: string) {
-    window.open('/details/'+ id);
+    window.open('/details/' + id);
   }
 
   getHighestHeight(): number {
@@ -150,5 +149,59 @@ export class MenuGeneratorComponent implements OnInit {
       }
     }
     return maxHeight;
+  }
+
+  generatePDF() {
+    const doc = new jsPDF();
+    for (let i = 0; i < this.menus.length; i++) {
+      doc.text('' + this.menus[i].title, 15, 20);
+      doc.addImage(
+        '' + this.getImageURL(this.menus[i].image_id),
+        'JPEG',
+        15,
+        35,
+        100,
+        100
+      );
+      doc.setFontSize(10);
+      doc.text('Zutaten:', 120, 40);
+      //this.ingredientsSplit = res.ingredients.split('\n');
+      let count = 45;
+      this.menus[i].ingredients.split('\n').map((ingredient) => {
+        doc.text('- ' + ingredient, 125, count);
+        count += 5;
+      });
+      doc.setFont('default', 'bold');
+      doc.text('' + this.menus[i].description, 15, 145);
+      doc.setFont('default', 'normal');
+      doc.text('' + this.menus[i].procedure, 15, 150);
+      
+      let headers = [
+        "kcal",
+        "Eiweiss",
+        "Fett",
+        "Kohlenhydrate"
+      ]
+
+      let tableData = {
+        kcal: this.menus[i].energy_cal.toString(),
+        Eiweiss: this.menus[i].protein_g.toString(),
+        Fett: this.menus[i].fat_g.toString(),
+        Kohlenhydrate: this.menus[i].carbohydrate_g.toString()
+      }
+      let data = []
+      data.push(Object.assign({}, tableData));
+      doc.table(15, 170, data, headers, { autoSize: true});
+
+      // TODO fix overflow
+      // TODO instert table
+      // TODO remove submit
+      // TODO design
+      // TODO check if last page
+      doc.addPage('a4', 'p');
+    }
+    // http://raw.githack.com/MrRio/jsPDF/master/
+
+    doc.save('tableToPdf.pdf');
   }
 }

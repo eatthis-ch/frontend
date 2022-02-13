@@ -153,7 +153,11 @@ export class MenuGeneratorComponent implements OnInit {
 
   generatePDF() {
     const doc = new jsPDF();
+    const fontSizeTitle = 24;
+    const fontSizeText = 10;
+
     for (let i = 0; i < this.menus.length; i++) {
+      doc.setFontSize(fontSizeTitle);
       doc.text('' + this.menus[i].title, 15, 20);
       doc.addImage(
         '' + this.getImageURL(this.menus[i].image_id),
@@ -163,45 +167,59 @@ export class MenuGeneratorComponent implements OnInit {
         100,
         100
       );
-      doc.setFontSize(10);
+      doc.setFontSize(fontSizeText);
       doc.text('Zutaten:', 120, 40);
-      //this.ingredientsSplit = res.ingredients.split('\n');
-      let count = 45;
-      this.menus[i].ingredients.split('\n').map((ingredient) => {
-        doc.text('- ' + ingredient, 125, count);
-        count += 5;
-      });
-      doc.setFont('default', 'bold');
-      doc.text('' + this.menus[i].description, 15, 145);
-      doc.setFont('default', 'normal');
-      doc.text('' + this.menus[i].procedure, 15, 150);
-      
-      let headers = [
-        "kcal",
-        "Eiweiss",
-        "Fett",
-        "Kohlenhydrate"
-      ]
 
+      let distanceInList = 45;
+      this.menus[i].ingredients.split('\n').map((ingredient) => {
+        if (ingredient.length > 38) {
+          let textLines = doc
+            .setFont('helvetica')
+            .setFontSize(fontSizeText)
+            .splitTextToSize('- ' + ingredient, 60);
+          doc.text(textLines, 125, distanceInList);
+          distanceInList += 3 * Math.ceil(ingredient.length / 20);
+        } else {
+          doc.text('- ' + ingredient, 125, distanceInList);
+          distanceInList += 5;
+        }
+      });
+
+      let descriptionLines = doc
+        .setFont('helvetica', 'bold')
+        .setFontSize(fontSizeText)
+        .splitTextToSize('' + this.menus[i].description, 100);
+      doc.text(descriptionLines, 15, 145);
+
+      let procedureLines = doc
+        .setFont('helvetica', 'normal')
+        .setFontSize(fontSizeText)
+        .splitTextToSize('' + this.menus[i].procedure, 100);
+      doc.text(
+        procedureLines,
+        15,
+        147 + 3 * Math.ceil(this.menus[i].description.length / 30)
+      );
+      console.log(3 * Math.ceil(this.menus[i].description.length / 30));
+
+      let headers = ['kcal', 'E', 'F', 'K'];
       let tableData = {
         kcal: this.menus[i].energy_cal.toString(),
-        Eiweiss: this.menus[i].protein_g.toString(),
-        Fett: this.menus[i].fat_g.toString(),
-        Kohlenhydrate: this.menus[i].carbohydrate_g.toString()
-      }
-      let data = []
+        E: this.menus[i].protein_g.toString(),
+        F: this.menus[i].fat_g.toString(),
+        K: this.menus[i].carbohydrate_g.toString(),
+      };
+      let data = [];
       data.push(Object.assign({}, tableData));
-      doc.table(15, 170, data, headers, { autoSize: true});
+      doc.table(125, distanceInList, data, headers, {
+        autoSize: false,
+        fontSize: 12,
+      });
 
-      // TODO fix overflow
-      // TODO instert table
-      // TODO remove submit
-      // TODO design
-      // TODO check if last page
-      doc.addPage('a4', 'p');
+      if (this.menus.length - 1 !== i) {
+        doc.addPage('a4', 'p');
+      }
     }
-    // http://raw.githack.com/MrRio/jsPDF/master/
-
-    doc.save('tableToPdf.pdf');
+    doc.save('GeneratedMenus.pdf');
   }
 }

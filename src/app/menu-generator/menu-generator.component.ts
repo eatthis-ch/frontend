@@ -200,7 +200,6 @@ export class MenuGeneratorComponent implements OnInit {
         15,
         147 + 3 * Math.ceil(this.menus[i].description.length / 30)
       );
-      console.log(3 * Math.ceil(this.menus[i].description.length / 30));
 
       let headers = ['kcal', 'E', 'F', 'K'];
       let tableData = {

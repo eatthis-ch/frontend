@@ -14,7 +14,7 @@ export class HeaderComponent {
   faArchive = faArchive;
 
   clickOverview() {
-    this.router.navigate(['overview']);
+    this.router.navigate(['']);
     const temp = setTimeout(() => {
       const highestTimeoutId = setTimeout(';');
       for (let i = 0; i < highestTimeoutId; i++) {
@@ -24,6 +24,6 @@ export class HeaderComponent {
   }
 
   clickGenerator() {
-    this.router.navigate(['']);
+    this.router.navigate(['generator']);
   }
 }

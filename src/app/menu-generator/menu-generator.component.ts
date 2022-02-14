@@ -4,6 +4,7 @@ import { Menu } from '../shared/models/menu';
 import { MenuService } from '../shared/services/menu.service';
 import { faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-menu-generator',
@@ -26,7 +27,7 @@ export class MenuGeneratorComponent implements OnInit {
   lockedMenuIds: string[] = [];
   hover = false;
   maxHeight = 250;
-  isMobile = false
+  isMobile = false;
 
   constructor(private menuService: MenuService, private router: Router) {}
 
@@ -50,13 +51,11 @@ export class MenuGeneratorComponent implements OnInit {
       if (this.menus.length > 0) {
         let img;
         if (this.isMobile) {
-          img = document.getElementsByClassName(
-            'previewImg'
-          )[this.group.get('numOfRecipes')?.value * 2 - 1] as HTMLElement;
+          img = document.getElementsByClassName('previewImg')[
+            this.group.get('numOfRecipes')?.value * 2 - 1
+          ] as HTMLElement;
         } else {
-          img = document.getElementsByClassName(
-            'previewImg'
-          )[0] as HTMLElement;
+          img = document.getElementsByClassName('previewImg')[0] as HTMLElement;
         }
         this.imgHeight = img.offsetHeight;
         this.imgWidth = img.offsetWidth;
@@ -137,7 +136,7 @@ export class MenuGeneratorComponent implements OnInit {
   }
 
   openMenu(id: string) {
-    window.open('/details/'+ id);
+    window.open('/details/' + id);
   }
 
   getHighestHeight(): number {
@@ -150,5 +149,76 @@ export class MenuGeneratorComponent implements OnInit {
       }
     }
     return maxHeight;
+  }
+
+  generatePDF() {
+    const doc = new jsPDF();
+    const fontSizeTitle = 24;
+    const fontSizeText = 10;
+
+    for (let i = 0; i < this.menus.length; i++) {
+      doc.setFontSize(fontSizeTitle);
+      doc.text('' + this.menus[i].title, 15, 20);
+      doc.addImage(
+        '' + this.getImageURL(this.menus[i].image_id),
+        'JPEG',
+        15,
+        35,
+        100,
+        100
+      );
+      doc.setFontSize(fontSizeText);
+      doc.text('Zutaten:', 120, 40);
+
+      let distanceInList = 45;
+      this.menus[i].ingredients.split('\n').map((ingredient) => {
+        if (ingredient.length > 38) {
+          let textLines = doc
+            .setFont('helvetica')
+            .setFontSize(fontSizeText)
+            .splitTextToSize('- ' + ingredient, 60);
+          doc.text(textLines, 125, distanceInList);
+          distanceInList += 3 * Math.ceil(ingredient.length / 20);
+        } else {
+          doc.text('- ' + ingredient, 125, distanceInList);
+          distanceInList += 5;
+        }
+      });
+
+      let descriptionLines = doc
+        .setFont('helvetica', 'bold')
+        .setFontSize(fontSizeText)
+        .splitTextToSize('' + this.menus[i].description, 100);
+      doc.text(descriptionLines, 15, 145);
+
+      let procedureLines = doc
+        .setFont('helvetica', 'normal')
+        .setFontSize(fontSizeText)
+        .splitTextToSize('' + this.menus[i].procedure, 100);
+      doc.text(
+        procedureLines,
+        15,
+        147 + 3 * Math.ceil(this.menus[i].description.length / 30)
+      );
+
+      let headers = ['kcal', 'E', 'F', 'K'];
+      let tableData = {
+        kcal: this.menus[i].energy_cal.toString(),
+        E: this.menus[i].protein_g.toString(),
+        F: this.menus[i].fat_g.toString(),
+        K: this.menus[i].carbohydrate_g.toString(),
+      };
+      let data = [];
+      data.push(Object.assign({}, tableData));
+      doc.table(125, distanceInList, data, headers, {
+        autoSize: false,
+        fontSize: 12,
+      });
+
+      if (this.menus.length - 1 !== i) {
+        doc.addPage('a4', 'p');
+      }
+    }
+    doc.save('GeneratedMenus.pdf');
   }
 }

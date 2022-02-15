@@ -29,7 +29,15 @@
         </div>
       </div>
       <button mat-raised-button type="submit">Menu generieren</button>
-      <button mat-raised-button class="pdf-button" type="button" (click)="generatePDF()">PDF generieren</button>
+      <button
+        mat-raised-button
+        class="pdf-button"
+        type="button"
+        *ngIf="menus.length > 0"
+        (click)="generatePDF()"
+      >
+        PDF generieren
+      </button>
     </form>
   </div>
 
